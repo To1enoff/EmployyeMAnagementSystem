@@ -1,0 +1,7 @@
+Employee ID : 132
+Employee Name : madiyar
+Age : 546
+Employee Contact : 235
+Email Information :56233
+Employee position : 63562
+Employee Salary :23514.0
