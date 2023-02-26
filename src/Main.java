@@ -164,16 +164,7 @@ class Employee_Update {
 
 class EmployManagementSystem
 {
-    private static void nextOp(){
 
-        System.out.print("\nPress Enter to Continue...");
-        Scanner sc = new Scanner(System.in);
-        sc.nextLine();
-        System.out.print("\033[H\033[2J");
-        MainMenu obj1 = new MainMenu();
-        obj1.menu();
-
-    }
     public static void main(String arv[]) throws Exception {
         System.out.print("\033[H\033[2J");
 
@@ -212,7 +203,10 @@ class EmployManagementSystem
                         System.out.println(e);
                     }
 
-                    nextOp();
+                    System.out.print("\nPress Enter to Continue...");
+                    sc.nextLine();
+                    System.out.print("\033[H\033[2J");
+                    obj1.menu();
                     break;
                 }
 
@@ -223,7 +217,10 @@ class EmployManagementSystem
                     Employee_Remove epr = new Employee_Remove();
                     epr.removeFile(ID);
 
-                    nextOp();
+                    System.out.print("\nPress Enter to Continue...");
+                    sc.nextLine();
+                    System.out.print("\033[H\033[2J");
+                    obj1.menu();
                     break;
                 }
                 case 4:
@@ -248,7 +245,10 @@ class EmployManagementSystem
                         File file = new File("file" + ID + ".txt");
                         file.renameTo(new File("file" + n + ".txt"));
                     }
-                    nextOp();
+                    System.out.print("\nPress Enter to Continue...");
+                    sc.nextLine();
+                    System.out.print("\033[H\033[2J");
+                    obj1.menu();
                     break;
                 }
                 case 5:
