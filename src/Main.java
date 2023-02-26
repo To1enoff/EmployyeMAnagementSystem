@@ -205,6 +205,7 @@ class EmployManagementSystem
 
                     System.out.print("\nPress Enter to Continue...");
                     sc.nextLine();
+                    sc.nextLine();
                     System.out.print("\033[H\033[2J");
                     obj1.menu();
                     break;
@@ -218,6 +219,7 @@ class EmployManagementSystem
                     epr.removeFile(ID);
 
                     System.out.print("\nPress Enter to Continue...");
+                    sc.nextLine();
                     sc.nextLine();
                     System.out.print("\033[H\033[2J");
                     obj1.menu();
@@ -246,6 +248,7 @@ class EmployManagementSystem
                         file.renameTo(new File("file" + n + ".txt"));
                     }
                     System.out.print("\nPress Enter to Continue...");
+                    sc.nextLine();
                     sc.nextLine();
                     System.out.print("\033[H\033[2J");
                     obj1.menu();
