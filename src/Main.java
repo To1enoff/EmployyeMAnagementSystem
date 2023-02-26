@@ -27,21 +27,25 @@ class CodeExit
         System.exit(0);
     }
 }
-class Employee_Add
+class Employee_Add extends EmployDetail
 {
+    EmployDetail emp = new EmployDetail() {
+        @Override
+        public void getInfo() {
+            super.getInfo();
+        }
+    };
     public void createFile()
     {
         Scanner sc = new Scanner(System.in);
-
-        EmployDetail employee = new EmployDetail();
-        employee.getInfo();
+        super.getInfo();
         try{
-            File f1 = new File("file"+employee.id+".txt");
+            File f1 = new File("file"+super.id+".txt");
             if(f1.createNewFile()){
-                FileWriter myWriter = new FileWriter("file"+employee.id+".txt");
-                myWriter.write("Employee ID : " + employee.id + "\nEmployee Name : " + employee.name +
-                        "\nAge : " + employee.Age  + "\nEmployee Contact : " + employee.contact + "\nEmail Information :"
-                        + employee.email + "\nEmployee position : " + employee.position + "\nEmployee Salary :" + employee.salary);
+                FileWriter myWriter = new FileWriter("file"+super.id+".txt");
+                myWriter.write("Employee ID : " + super.id + "\nEmployee Name : " + super.name +
+                        "\nAge : " + super.Age  + "\nEmployee Contact : " + super.contact + "\nEmail Information :"
+                        + super.email + "\nEmployee position : " + super.position + "\nEmployee Salary :" + super.salary);
                 myWriter.close();
                 System.out.println("\nEmployee has been Added :)");
 
@@ -61,7 +65,7 @@ class Employee_Add
 }
 
 
-class EmployDetail
+abstract class EmployDetail
 {
     String name;
     int Age;
