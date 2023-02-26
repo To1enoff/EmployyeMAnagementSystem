@@ -1,0 +1,7 @@
+Employee ID : 224562
+Employee Name : Madiyar
+Age : 17
+Employee Contact : 5564
+Email Information :sda@
+Employee position : Leader
+Employee Salary :2000.0

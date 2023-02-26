@@ -10,10 +10,10 @@ class MainMenu
         System.out.println("        *******************************************");
         System.out.println("                     ~By Madiyar Tolen");
         System.out.println("\n\nPress 1 : Add an Employee Details");
-        System.out.println("Press 2 :  See an Employee Details ");
-        System.out.println("Press 3 :  Remove an Employee");
-        System.out.println("Press 4 :  Update Employee Details");
-        System.out.println("Press 5 :  Exit the EMS Portal");
+        System.out.println("Press 2 : See an Employee Details ");
+        System.out.println("Press 3 : Remove an Employee");
+        System.out.println("Press 4 : Update Employee Details");
+        System.out.println("Press 5 : Exit the EMS Portal");
 
     }
 }
@@ -41,7 +41,7 @@ class Employee_Add
                 FileWriter myWriter = new FileWriter("file"+employee.id+".txt");
                 myWriter.write("Employee ID : " + employee.id + "\nEmployee Name : " + employee.name +
                         "\nAge : " + employee.Age  + "\nEmployee Contact : " + employee.contact + "\nEmail Information :"
-                         + employee.email + "\nEmployee position : " + employee.position + "\nEmployee Salary :" + employee.salary);
+                        + employee.email + "\nEmployee position : " + employee.position + "\nEmployee Salary :" + employee.salary);
                 myWriter.close();
                 System.out.println("\nEmployee has been Added :)");
 
@@ -100,6 +100,7 @@ class Employee_Show
         {
             System.out.println(sc.nextLine());
         }
+        sc.close();
     }
 }
 interface Remove{
@@ -118,72 +119,46 @@ class Employee_Remove implements Remove{
 
 }
 
-class Employee_Update
-{
-    public void updateFile(String s, String o, String n)
+class Employee_Update {
+    public void updateFile(String s, String o, String n) throws IOException
     {
 
-        String oldContent = "";
-        String newF = "";
+        File FileEdit = new File("file" + s + ".txt");
+
+        String oldline = "";
+
         BufferedReader reader = null;
-        try
-        {
-            File fileToBeModified = new File("file" + s + ".txt");
-            reader = new BufferedReader(new FileReader(fileToBeModified));
+
+        FileWriter writer = null;
+
+        try {
+            reader = new BufferedReader(new FileReader(FileEdit));
             String line = reader.readLine();
-            String isID = line;
             while (line != null)
             {
-                oldContent = oldContent + line + System.lineSeparator();
-                newF += line + "\n";
+                oldline = oldline + line + System.lineSeparator();//
+
                 line = reader.readLine();
             }
-            if(!isID.contains(o)){
-                FileWriter writer = null;
-                String newContent = oldContent.replaceAll(o, n);
-                writer = new FileWriter(fileToBeModified);
-                writer.write(newContent);
-                writer.close();
-                reader.close();
-            }
-            else {
-                reader.close();
-                Files.delete(Path.of("file" + o + ".txt"));
-//
-//                if(Files.delete(Path.of("file" + o + ".txt"))){
-//                    System.out.println("Deleted");
-//                }
-//                else {
-//                    System.out.println( o + "Doesn't delted");
-//                }
-                File f1 = new File("file"+ n +".txt");
-                if(f1.createNewFile()) {
-                    FileWriter write = new FileWriter("file" + n + ".txt");
-                    newF = newF.replaceAll(o, n);
-                    write.write(newF);
-                    write.close();
-                }
-                else{
-                    System.out.println("New file doesn't created");
-                }
+            String newline = oldline.replaceAll(o, n);
+            writer = new FileWriter(FileEdit);
 
-
-            }
+            writer.write(newline);
         }
-        catch (IOException e)
-        {
+        catch (IOException e) {
             e.printStackTrace();
         }
         finally {
-            try{
+            try {
                 reader.close();
+                writer.close();
             }
-            catch (IOException e){
+            catch (IOException e) {
                 e.printStackTrace();
             }
         }
-    }
 
+    }
 
 }
 
@@ -261,15 +236,18 @@ class EmployManagementSystem
                     catch(Exception e) {
                         System.out.println(e);
                     }
-                    Employee_Update epu = new Employee_Update();
                     System.out.print("\nPlease Enter the detail you want to Update :");
                     System.out.print("\nFor Example :\n");
                     System.out.println("If you want to Change the Name, then Enter Current Name and Press Enter. Then write the new Name then Press Enter. It will Update the Name.\n");
                     String s = sc.next();
                     System.out.print("Please Enter the Updated Info :");
                     String n = sc.next();
+                    Employee_Update epu = new Employee_Update();
                     epu.updateFile(ID, s, n);
-
+                    if(ID.equals(s)){
+                        File file = new File("file" + ID + ".txt");
+                        file.renameTo(new File("file" + n + ".txt"));
+                    }
                     nextOp();
                     break;
                 }
